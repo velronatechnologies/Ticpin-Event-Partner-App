@@ -32,8 +32,6 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage>
     with SingleTickerProviderStateMixin {
- 
-
   bool _isInitialized = false;
 
   Future<void> _initializeData() async {
@@ -49,11 +47,10 @@ class _HomepageState extends State<Homepage>
 
   Future<void> _deleteEvent(String docId) async {
     try {
-      final doc =
-          await FirebaseFirestore.instance
-              .collection('events')
-              .doc(docId)
-              .get();
+      final doc = await FirebaseFirestore.instance
+          .collection('events')
+          .doc(docId)
+          .get();
 
       if (!doc.exists) {
         if (!mounted) return;
@@ -82,30 +79,29 @@ class _HomepageState extends State<Homepage>
       final confirm = await showDialog<bool>(
         context: context,
         barrierDismissible: false,
-        builder:
-            (ctx) => AlertDialog(
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(16),
-              ),
-              title: const Text(
-                "Delete Event",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              content: const Text(
-                "Are you sure you want to permanently delete this event? This action cannot be undone.",
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(ctx, false),
-                  child: const Text("Cancel"),
-                ),
-                TextButton(
-                  style: TextButton.styleFrom(foregroundColor: Colors.red),
-                  onPressed: () => Navigator.pop(ctx, true),
-                  child: const Text("Delete"),
-                ),
-              ],
+        builder: (ctx) => AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          title: const Text(
+            "Delete Event",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          content: const Text(
+            "Are you sure you want to permanently delete this event? This action cannot be undone.",
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(ctx, false),
+              child: const Text("Cancel"),
             ),
+            TextButton(
+              style: TextButton.styleFrom(foregroundColor: Colors.red),
+              onPressed: () => Navigator.pop(ctx, true),
+              child: const Text("Delete"),
+            ),
+          ],
+        ),
       );
 
       // Only delete if user confirmed
@@ -153,7 +149,6 @@ class _HomepageState extends State<Homepage>
       }
     }
   }
-
 
   Sizes size = Sizes();
 
@@ -253,7 +248,6 @@ class _HomepageState extends State<Homepage>
                               ),
                             ),
                           ),
-                          
                         ],
                       ),
                     ],
@@ -266,15 +260,14 @@ class _HomepageState extends State<Homepage>
                   StreamBuilder<QuerySnapshot>(
                     // Remove the outer StreamBuilder for authStateChanges
                     // Use FirebaseAuth.instance.currentUser directly
-                    stream:
-                        FirebaseFirestore.instance
-                            .collection('events')
-                            .where(
-                              'createdBy',
-                              isEqualTo:
-                                  FirebaseAuth.instance.currentUser?.uid ?? '',
-                            )
-                            .snapshots(),
+                    stream: FirebaseFirestore.instance
+                        .collection('events')
+                        .where(
+                          'createdBy',
+                          isEqualTo:
+                              FirebaseAuth.instance.currentUser?.uid ?? '',
+                        )
+                        .snapshots(),
                     builder: (context, snapshot) {
                       if (!_isInitialized) {
                         return SingleChildScrollView(
@@ -375,7 +368,12 @@ class _HomepageState extends State<Homepage>
                               child: Padding(
                                 padding: const EdgeInsets.all(2.0),
                                 child: ListTile(
-                                  onTap: () => Get.to(AdminEventManagementPage(eventId:  data['eventId'],eventData:  data)),
+                                  onTap: () => Get.to(
+                                    AdminEventManagementPage(
+                                      eventId: data['eventId'],
+                                      eventData: data,
+                                    ),
+                                  ),
                                   tileColor: Colors.white,
                                   title: Text(data['name'] ?? 'Untitled'),
                                   subtitle: Text(
@@ -407,17 +405,16 @@ class _HomepageState extends State<Homepage>
                                         _deleteEvent(doc.id);
                                       }
                                     },
-                                    itemBuilder:
-                                        (context) => const [
-                                          PopupMenuItem(
-                                            value: 'edit',
-                                            child: Text('Update'),
-                                          ),
-                                          PopupMenuItem(
-                                            value: 'delete',
-                                            child: Text('Delete'),
-                                          ),
-                                        ],
+                                    itemBuilder: (context) => const [
+                                      PopupMenuItem(
+                                        value: 'edit',
+                                        child: Text('Update'),
+                                      ),
+                                      PopupMenuItem(
+                                        value: 'delete',
+                                        child: Text('Delete'),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
@@ -454,7 +451,7 @@ class _HomepageState extends State<Homepage>
 
                         width: size.width * 0.14,
                         height: size.width * 0.145,
-                        
+
                         child: Center(
                           child: Icon(Icons.add_rounded, color: whiteColor),
                         ),

@@ -375,9 +375,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:ticpin_partner/constants/colors.dart';
-import 'package:ticpin_partner/constants/size.dart';
-import 'package:ticpin_partner/pages/homepage.dart';
+import 'package:ticpin/constants/colors.dart';
+import 'package:ticpin/constants/size.dart';
+import 'package:ticpin/pages/homepage.dart';
 
 class Loginpage extends StatefulWidget {
   const Loginpage({super.key});
@@ -520,10 +520,9 @@ class _LoginpageState extends State<Loginpage> with WidgetsBindingObserver {
                 AnimatedPadding(
                   duration: const Duration(milliseconds: 100),
                   padding: EdgeInsets.only(
-                    bottom:
-                        keyboard > 0
-                            ? (keyboard - size.height * 0.08).abs()
-                            : 20,
+                    bottom: keyboard > 0
+                        ? (keyboard - size.height * 0.08).abs()
+                        : 20,
                   ),
 
                   /// MAIN LOGIN BOX
@@ -608,24 +607,23 @@ class _LoginpageState extends State<Loginpage> with WidgetsBindingObserver {
                           ),
                           fixedSize: Size(size.width * 0.9, size.width * 0.15),
                         ),
-                        child:
-                            loading
-                                ? Text(
-                                  "Continue",
-                                  style: TextStyle(
-                                    fontSize: size.width * 0.04,
-                                    color: blackColor,
-                                    fontFamily: "Regular",
-                                  ),
-                                )
-                                : Text(
-                                  "Continue",
-                                  style: TextStyle(
-                                    fontSize: size.width * 0.04,
-                                    color: blackColor,
-                                    fontFamily: "Regular",
-                                  ),
+                        child: loading
+                            ? Text(
+                                "Continue",
+                                style: TextStyle(
+                                  fontSize: size.width * 0.04,
+                                  color: blackColor,
+                                  fontFamily: "Regular",
                                 ),
+                              )
+                            : Text(
+                                "Continue",
+                                style: TextStyle(
+                                  fontSize: size.width * 0.04,
+                                  color: blackColor,
+                                  fontFamily: "Regular",
+                                ),
+                              ),
                       ),
                     ],
                   ),
